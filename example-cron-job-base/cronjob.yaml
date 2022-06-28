@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: example-cron-job
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: example-cron-job
+            image: alpine
+            imagePullPolicy: IfNotPresent
+            env:
+              valueFrom:
+                configMapKeyRef:
+                  name: example-config
+                  key: config
+          restartPolicy: OnFailure

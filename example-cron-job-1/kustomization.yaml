@@ -1,0 +1,5 @@
+bases:
+  - ../example-cron-job-base
+resources:
+  - configmap.yaml
+nameSuffix: '-1'

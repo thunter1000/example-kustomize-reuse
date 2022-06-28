@@ -1,0 +1,13 @@
+bases:
+  - ../example-cron-job-base
+resources:
+  - configmap.yaml
+nameSuffix: '-2'
+patches:
+  - patch: |-
+      apiVersion: batch/v1
+      kind: CronJob
+      metadata:
+        name: example-cron-job
+      spec:
+        schedule: '* * * * 15'
