@@ -4,7 +4,6 @@ Quick example on re-usability with Kustomize. Preventing the need to re-define a
 
 
 ## Resulting YAML.
-
 ```yaml
 apiVersion: v1
 data:
@@ -34,7 +33,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: config
-                  name: example-config-1
+                  name: example-config-1 # Config Map re-name is automatically handled in fields that reference it (note: only works with native manifests).
             image: alpine
             imagePullPolicy: IfNotPresent
             name: example-cron-job
@@ -54,11 +53,11 @@ spec:
           - env:
               valueFrom:
                 configMapKeyRef:
+                  name: example-config-2 # Config Map re-name is automatically handled in fields that reference it (note: only works with native manifests).
                   key: config
-                  name: example-config-2
             image: alpine
             imagePullPolicy: IfNotPresent
             name: example-cron-job
           restartPolicy: OnFailure
-  schedule: '* * * * 15'
+  schedule: '* * * * 15' # Schedule has been patched in ./example-cron-job-2/kustomization.yaml
 ```
